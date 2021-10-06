@@ -34,6 +34,7 @@
 //-----------------------------------------------------------------------------
 
 #include "astyle_main.h"
+#include "bridge.h"
 
 #include <algorithm>
 #include <cerrno>
@@ -4288,7 +4289,7 @@ extern "C" EXPORT const char* STDCALL AStyleGetVersion(void)
 // main function for ASConsole build
 //----------------------------------------------------------------------------
 
-int main(int argc, char** argv)
+int run_astyle(int argc, char** argv)
 {
 	// create objects
 	ASFormatter formatter;

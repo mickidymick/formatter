@@ -17,15 +17,17 @@ int yed_plugin_boot(yed_plugin *self) {
         yed_set_var("formatter-auto", "yes");
     }
 
-    if (yed_var_is_truthy("formatter-auto")) {
-        yed_plugin_add_event_handler(self, auto_formatter_eh);
-    }
+    yed_plugin_add_event_handler(self, auto_formatter_eh);
 
     yed_plugin_set_command(self, "run-formatter", run_formatter);
     return 0;
 }
 
 void formatter_fmt(yed_event* event) {
+    if (yed_var_is_truthy("formatter-auto")) {
+        return;
+    }
+    
     if(!event->buffer
             || event->buffer->kind != BUFF_KIND_FILE) {
         return;

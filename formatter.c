@@ -24,10 +24,10 @@ int yed_plugin_boot(yed_plugin *self) {
 }
 
 void formatter_fmt(yed_event* event) {
-    if (yed_var_is_truthy("formatter-auto")) {
+    if (!yed_var_is_truthy("formatter-auto")) {
         return;
     }
-    
+
     if(!event->buffer
             || event->buffer->kind != BUFF_KIND_FILE) {
         return;

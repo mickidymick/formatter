@@ -650,13 +650,13 @@ void ASConsole::formatFile(const string& fileName_)
 	{
 		if (!isDryRun)
 			writeFile(fileName_, encoding, out);
-		printMsg(_("Formatted  %s\n"), displayName);
+/* 		printMsg(_("Formatted  %s\n"), displayName); */
 		filesFormatted++;
 	}
 	else
 	{
 		if (!isFormattedOnly)
-			printMsg(_("Unchanged  %s\n"), displayName);
+/* 			printMsg(_("Unchanged  %s\n"), displayName); */
 		filesUnchanged++;
 	}
 

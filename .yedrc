@@ -1,0 +1,5 @@
+set builder-build-command './build.sh'
+plugins-add-dir           '~/tmp_yed/completed_plugins/formatter'
+plugin-unload             'ypm/plugins/formatter'
+plugin-load               'formatter'
+yedrc-load                'my_yed_layout.yedrc'

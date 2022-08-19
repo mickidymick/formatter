@@ -70,6 +70,8 @@ int auto_formatter(char *path) {
     argv = (char **) malloc(2*sizeof(char*));
     argv[0] = strdup("astyle");
     argv[1] = strdup(path);
+    free(argv[0]);
+    free(argv[1]);
 
     status = run_astyle(argc, argv);
 

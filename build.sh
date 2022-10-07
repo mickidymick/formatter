@@ -17,5 +17,5 @@ for p in "${pids[@]}"; do
     echo $p
     wait $p || exit 1
 done
-g++ -O3 -DNDEBUG $(yed --print-ldflags) -s formatter.o ASBeautifier.cpp.o ASEnhancer.cpp.o ASFormatter.cpp.o ASLocalizer.cpp.o ASResource.cpp.o astyle_main.cpp.o -o formatter.so
+g++ -O3 -DNDEBUG -s formatter.o ASBeautifier.cpp.o ASEnhancer.cpp.o ASFormatter.cpp.o ASLocalizer.cpp.o ASResource.cpp.o astyle_main.cpp.o $(yed --print-ldflags) -o formatter.so
 rm formatter.o ASBeautifier.cpp.o ASEnhancer.cpp.o ASFormatter.cpp.o ASLocalizer.cpp.o ASResource.cpp.o astyle_main.cpp.o

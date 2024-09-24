@@ -1,5 +1,4 @@
 #include <yed/plugin.h>
-#include "bridge.h"
 
 void formatter_fmt(yed_event* event);
 void run_formatter(int nargs, char** args);
@@ -55,6 +54,7 @@ void run_formatter(int nargs, char** args) {
             ||  frame->buffer->ft == yed_get_ft("C++")) {
         if(auto_formatter(frame->buffer->path) == 0) {
             YEXE("buffer-reload");
+            YEXE("redraw");
         }
     } else {
         yed_cerr("File type not C or C++");
@@ -63,17 +63,10 @@ void run_formatter(int nargs, char** args) {
 
 int auto_formatter(char *path) {
     int    status;
-    int    argc;
-    char **argv;
-
-    argc = 2;
-    argv = (char **) malloc(2*sizeof(char*));
-    argv[0] = strdup("astyle");
-    argv[1] = strdup(path);
-    free(argv[0]);
-    free(argv[1]);
-
-    status = run_astyle(argc, argv);
+    char *command = (char *)malloc(1024 * sizeof(char));
+    strcpy(command, "astyle ");
+    strcat(command, path);
+    status = system(command);
 
     return status;
 }

@@ -1,1 +1,5 @@
-formatter.so
+*.so
+.yedrc
+.ccls-cache
+compile_commands.json
+debug_build.sh

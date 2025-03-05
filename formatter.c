@@ -16,6 +16,10 @@ int yed_plugin_boot(yed_plugin *self) {
         yed_set_var("formatter-auto", "yes");
     }
 
+    if (yed_get_var("formatter-no-backup") == NULL) {
+        yed_set_var("formatter-no-backup", "no");
+    }
+
     yed_plugin_add_event_handler(self, auto_formatter_eh);
 
     yed_plugin_set_command(self, "run-formatter", run_formatter);
@@ -64,9 +68,17 @@ void run_formatter(int nargs, char** args) {
 int auto_formatter(char *path) {
     int    status;
     char *command = (char *)malloc(1024 * sizeof(char));
-    strcpy(command, "astyle ");
+    if (yed_var_is_truthy("formatter-no-backup")) {
+        strcpy(command, "astyle -n ");
+
+    } else {
+        strcpy(command, "astyle ");
+    }
     strcat(command, path);
     status = system(command);
+    if (status != 0) {
+        yed_log("Astyle must be installed");
+    }
 
     return status;
 }
